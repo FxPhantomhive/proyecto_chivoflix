@@ -1,6 +1,13 @@
 # proyecto_chivoflix
+Proyecto de peliculas ChivoFlix
 
-A new Flutter project.
+### Integrantes
+ARAUJO LEIVA, DAVID PORFIRIO 		25-4899-2017
+GUEVARA PORTILLO, DAVID ERNESTO 		25-4862-2017
+MELÉNDEZ ALFARO, FELIX IVÁN			25-5295-2017
+PORTILLO SALAZAR, DANIEL ALBERTO  	25-4871-2017
+VALDEZ LARIN, DIEGO ELIU  			25-4744-2017
+
 
 ## Getting Started
 
