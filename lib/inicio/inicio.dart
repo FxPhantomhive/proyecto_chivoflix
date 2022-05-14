@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
 import 'package:proyecto_chivoflix/inicio/datos.dart';
+import 'package:proyecto_chivoflix/detalle/detallePelicula.dart';
 
 class Inicio extends StatefulWidget {
   static const String route = '/inicio';
@@ -103,6 +104,7 @@ class _InicioState extends State<Inicio> {
               decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 219, 216, 216)),
               child: InkWell(
+                onTap: () => Navigator.pushNamed(context, detallePelicula.route),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [

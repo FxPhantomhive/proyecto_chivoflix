@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_chivoflix/detalle/detallePelicula.dart';
 import 'package:proyecto_chivoflix/inicio/inicio.dart';
 import 'package:proyecto_chivoflix/login/login.dart';
 
@@ -16,7 +17,8 @@ class Principal extends StatelessWidget {
       initialRoute: Inicio.route,
       routes: {
         Login.route: (context) => Login(),
-        Inicio.route: (context) => Inicio()
+        Inicio.route: (context) => Inicio(),
+        detallePelicula.route: (context) => detallePelicula()
       },
     );
   }
