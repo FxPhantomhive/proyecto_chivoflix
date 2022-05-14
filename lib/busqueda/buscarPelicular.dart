@@ -14,9 +14,12 @@ class BuscarPelicular extends StatefulWidget {
 class _BuscarPelicularState extends State<BuscarPelicular>{
 
 List<Pelicula> _peliculas =[
-  Pelicula("Spider-man: No way home", "2h m", "https://pics.filmaffinity.com/Spider_Man_No_Way_Home-642739124-large.jpg", false),
-  Pelicula("Spider-man: Into the Spiderverse", "2h m", "https://pics.filmaffinity.com/Spider_Man_No_Way_Home-642739124-large.jpg", false),
-  Pelicula("Spider-man: No way home", "2h m", "https://pics.filmaffinity.com/Spider_Man_No_Way_Home-642739124-large.jpg", false)
+  Pelicula("Spider-man:\nNo way home", "2h m", "https://pics.filmaffinity.com/Spider_Man_No_Way_Home-642739124-large.jpg", false),
+  Pelicula("Spider-man: \nInto the Spiderverse", "2h m", "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_.jpg", false),
+  Pelicula("Avengers\nInfinity War", "2h 35m", "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/04/vengadores-infinity-war-poster-imax.jpg?itok=rzHL0rTD", false),
+  Pelicula("Star Wars\nThe last Jedi", "2h 32m", "https://static.wikia.nocookie.net/disney/images/7/7a/Star_Wars_The_Last_Jedi_Poster_Official.jpg/revision/latest?cb=20171010025646&path-prefix=es", false),
+  Pelicula("Sherlock Holmes", "2h 8m", "https://m.media-amazon.com/images/M/MV5BMTg0NjEwNjUxM15BMl5BanBnXkFtZTcwMzk0MjQ5Mg@@._V1_.jpg", false),
+  Pelicula("Morbius", "1h 44m", "https://www.ecartelera.com/carteles/14400/14458/001_m.jpg", false),
 
 ];
 
@@ -34,7 +37,9 @@ List<Pelicula> _foundPeli=[];
 
 onSearch(String search){
 
-  print(search);
+  setState(() {
+    _foundPeli=_peliculas.where((pelicula) => pelicula.nombre.toLowerCase().contains(search)).toList();
+  });
 }
 
 
@@ -69,7 +74,10 @@ onSearch(String search){
         ),
       ),
       body: Container(
+        
+       
         color: Colors.grey.shade900,
+        
         child: ListView.builder(
           itemCount: _foundPeli.length,
           itemBuilder: (context,index){
@@ -91,10 +99,10 @@ onSearch(String search){
           Row(
             children: [
               Container(
-                width: 60,
-                height: 60,
+                width: 100,
+                height: 100,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(20),
                   child: Image.network(pelicula.image),
                 )
               ),
@@ -102,8 +110,10 @@ onSearch(String search){
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
                   Text(pelicula.nombre, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
-                  SizedBox(height: 5,),
+                  SizedBox(height: 5,
+                  ),
                   Text(pelicula.duracion, style: TextStyle(color: Colors.grey[500])),
                 ]
               )
