@@ -3,17 +3,16 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:proyecto_chivoflix/login/login.dart';
-import 'package:proyecto_chivoflix/registro/tarifa.dart';
+import 'package:selectable_container/selectable_container.dart';
 
-class Registro extends StatefulWidget {
-  static const String route = '/registro';
-  Registro({Key? key}) : super(key: key);
+class RTargeta extends StatefulWidget {
+  RTargeta({Key? key}) : super(key: key);
 
   @override
-  State<Registro> createState() => _RegistroState();
+  State<RTargeta> createState() => _RTargetaState();
 }
 
-class _RegistroState extends State<Registro> {
+class _RTargetaState extends State<RTargeta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +48,7 @@ class _RegistroState extends State<Registro> {
           child: ListView(
             children: <Widget>[
               Text(
-                "Registro de usuario",
+                "Ingrese sus datos de pago",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
@@ -64,7 +63,7 @@ class _RegistroState extends State<Registro> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: "Correo Electronico",
+                    hintText: "Numero de Tarjeta",
                     contentPadding: const EdgeInsets.all(15),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -82,7 +81,7 @@ class _RegistroState extends State<Registro> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: "Usuario...",
+                    hintText: "Nombre en Tarjeta",
                     contentPadding: const EdgeInsets.all(15),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -100,7 +99,7 @@ class _RegistroState extends State<Registro> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: "Contraseña...",
+                    hintText: "Vencimiento (05/28)",
                     contentPadding: const EdgeInsets.all(15),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -118,7 +117,7 @@ class _RegistroState extends State<Registro> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: "Confirmar contraseña...",
+                    hintText: "CVV",
                     contentPadding: const EdgeInsets.all(15),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -136,11 +135,11 @@ class _RegistroState extends State<Registro> {
                       context,
                       PageTransition(
                           alignment: Alignment.bottomCenter,
-                          child: TarifaSelect(),
+                          child: Login(),
                           type: PageTransitionType.scale));
                 },
                 child: Text(
-                  'Registrarse',
+                  'Procesar el Pago',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -166,29 +165,6 @@ class _RegistroState extends State<Registro> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget appBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-      child: SizedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back_outlined, color: Colors.white),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20, right: 15),
-              child: Image.asset("assets/spidey.jpg", width: 40, height: 40),
-            )
-          ],
         ),
       ),
     );
