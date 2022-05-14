@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_chivoflix/inicio/inicio.dart';
 import 'package:proyecto_chivoflix/login/login.dart';
+import 'package:proyecto_chivoflix/perfiles/perfiles.dart';
 
 void main() {
   runApp(const Principal());
@@ -13,10 +14,11 @@ class Principal extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Inicio.route,
+      initialRoute: perfiles.route,
       routes: {
         Login.route: (context) => Login(),
-        Inicio.route: (context) => Inicio()
+        Inicio.route: (context) => Inicio(),
+        perfiles.route: (context) => perfiles()
       },
     );
   }
