@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_chivoflix/busqueda/buscarPelicular.dart';
 import 'package:proyecto_chivoflix/inicio/inicio.dart';
+import 'package:proyecto_chivoflix/inicio/listadopelis.dart';
 import 'package:proyecto_chivoflix/login/login.dart';
 import 'package:proyecto_chivoflix/perfiles/perfiles.dart';
 import 'package:proyecto_chivoflix/registro/registroUsuario.dart';
@@ -17,7 +18,7 @@ class Principal extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Login.route,
+      initialRoute: ListadoPelis.route,
       //initialRoute: perfiles.route,
       routes: {
         Login.route: (context) => Login(),
@@ -25,7 +26,8 @@ class Principal extends StatelessWidget {
         perfiles.route: (context) => perfiles(),
         BuscarPelicular.route: (context) => BuscarPelicular(),
         Registro.route: (context) => Registro(),
-        detallePelicula.route: (context) => detallePelicula()
+        //detallePelicula.route: (context) => detallePelicula(),
+        ListadoPelis.route: (context) => ListadoPelis()
       },
     );
   }

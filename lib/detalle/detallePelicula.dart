@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:proyecto_chivoflix/reproductor/reproductor.dart';
 
 class detallePelicula extends StatefulWidget {
+  final String nombre;
+  final int id;
+  final String descrip;
+  final String imagen;
+  final String urlpeli;
+
   static const String route = '/Detalle';
-  detallePelicula({Key? key}) : super(key: key);
+  detallePelicula(
+      {Key? key,
+      required this.nombre,
+      required this.id,
+      required this.descrip,
+      required this.imagen,
+      required this.urlpeli})
+      : super(key: key);
 
   @override
   State<detallePelicula> createState() => _detallePeliculaState();
@@ -29,18 +44,18 @@ class _detallePeliculaState extends State<detallePelicula> {
         child: Column(
           children: [
             Container(
-              height: 300,
-              decoration: const BoxDecoration(
+              width: MediaQuery.of(context).size.width,
+              height: 450,
+              decoration: BoxDecoration(
                   image: DecorationImage(
-                image: NetworkImage(
-                    "https://cdn-3.expansion.mx/dims4/default/9491d3a/2147483647/strip/true/crop/1200x800+0+0/resize/1200x800!/format/webp/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fa9%2Fcb%2Fae6b5a1f4c5199e2ea4d8ca6f607%2Fmeme-spider-man-tom-andrew-tobey.jpg"),
+                image: AssetImage(widget.imagen),
               )),
             ),
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 10),
-              child: const Text(
-                "Spiderman: No Way Home",
+              child: Text(
+                widget.nombre,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -58,12 +73,21 @@ class _detallePeliculaState extends State<detallePelicula> {
             ),
             SizedBox(
                 child: ElevatedButton.icon(
-              label: const Text('Ver'),
+              label: const Text('Ver Pelicula'),
               style: ElevatedButton.styleFrom(primary: Colors.grey),
               icon: const Icon(Icons.play_arrow),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        alignment: Alignment.bottomCenter,
+                        child: Reproductor(
+                          urlpeli: widget.urlpeli,
+                        ),
+                        type: PageTransitionType.scale));
+              },
             )),
-            SizedBox(
+            /*SizedBox(
                 child: ElevatedButton.icon(
               label: const Text(
                 'Descargar',
@@ -75,12 +99,12 @@ class _detallePeliculaState extends State<detallePelicula> {
                 color: Colors.black,
               ),
               onPressed: () {},
-            )),
+            )),*/
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: const Text(
-                "Después de que Mysterio desvelara la identidad de Spider-Man a todo el mundo en Lejos de casa, Peter Parker (Tom Holland), desesperado por volver a la normalidad y recuperar su anterior vida, pide ayuda a Doctor Strange para enmendar tal acción. El Hechicero Supremo de Marvel accede a ayudar al joven Hombre Araña, sin embargo, algo sale mal y el multiverso se convierte en la mayor amenaza hasta el momento.",
+              child: Text(
+                widget.descrip,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
