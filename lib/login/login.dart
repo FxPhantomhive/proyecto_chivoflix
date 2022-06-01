@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:proyecto_chivoflix/modelos/peliculasmodelo.dart';
 import 'package:proyecto_chivoflix/registro/registroUsuario.dart';
+import 'package:http/http.dart' as http;
+import 'package:proyecto_chivoflix/servidor.dart';
 
 class Login extends StatefulWidget {
   static const String route = '/login';
@@ -11,6 +16,21 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  Future<List<Peliculas>> _getLogin(String usuario, String password) async {
+    var url = Uri.parse("${apiUrl}loginf");
+    final response = await http.post(url,headers:);
+    String cuerpo;
+    List<Peliculas> listado = [];
+    if (response.statusCode == 200) {
+      //print(response.body);
+      cuerpo = utf8.decode(response.bodyBytes);
+      final jsonData = jsonDecode(cuerpo);
+    } else {
+      throw Exception("Falla en conexion  estado 500");
+    }
+    return listado;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +47,7 @@ class _LoginState extends State<Login> {
               height: 130,
             ),
             TextField(
-              style: TextStyle(fontSize: 18, color: Colors.black54),
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,

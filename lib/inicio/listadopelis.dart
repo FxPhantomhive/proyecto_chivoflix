@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:page_transition/page_transition.dart';
 import 'package:proyecto_chivoflix/modelos/peliculasmodelo.dart';
 import 'package:proyecto_chivoflix/detalle/detallePelicula.dart';
+import 'package:proyecto_chivoflix/servidor.dart';
 
 class ListadoPelis extends StatefulWidget {
   ListadoPelis({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class ListadoPelis extends StatefulWidget {
 class _ListadoPelisState extends State<ListadoPelis> {
   late Future<List<Peliculas>> _listadoPeliculas;
   Future<List<Peliculas>> _getPeliculas() async {
-    final response =
-        await http.get(Uri.parse('http://192.168.1.2:80/api/peliculas'));
+    final response = await http.get(Uri.parse('${apiUrl}peliculas'));
     String cuerpo;
     List<Peliculas> listado = [];
     if (response.statusCode == 200) {
@@ -34,7 +34,7 @@ class _ListadoPelisState extends State<ListadoPelis> {
             item['calidad'],
             item['director'],
             item['banner'],
-            item['Pelicula']));
+            item['Pelicula'] ?? ""));
       }
     } else {
       throw Exception("Falla en conexion  estado 500");
@@ -117,7 +117,7 @@ class _ListadoPelisState extends State<ListadoPelis> {
                     nombre: itempeli.nombre,
                     descrip: itempeli.descripcion,
                     imagen: "assets/" + itempeli.banner,
-                    urlpeli: "assets/" + itempeli.Pelicula,
+                    urlpeli: "assets/" + itempeli.pelicula,
                   ),
                   type: PageTransitionType.scale))
         },
