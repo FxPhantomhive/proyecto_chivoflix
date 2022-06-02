@@ -35,21 +35,16 @@ class _LoginState extends State<Login> {
       cuerpo = utf8.decode(response.bodyBytes);
       final jsonData = jsonDecode(cuerpo);
       print(jsonData);
-      /*
-      if (jsonData["Mensaje"] == "Registro no encontrado") {
-        ScaffoldMessenger.of(context).showSnackBar(login);
-      } else {
-        for (var item in jsonData) {
-          datosUsuario.add(Usuario(
-              item["idUsuarios"],
-              item["username"],
-              item["email"],
-              item["perfiles"],
-              item["imagen"],
-              item["idRol"],
-              item["idPlanes"] ?? 0));
-        }
-      }*/
+      for (var item in jsonData) {
+        datosUsuario.add(Usuario(
+            item["idUsuarios"],
+            item["username"],
+            item["email"],
+            item["perfiles"],
+            item["imagen"],
+            item["idRol"],
+            item["idPlanes"] ?? 0));
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(login);
     }
