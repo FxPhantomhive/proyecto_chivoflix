@@ -5,7 +5,6 @@ import 'package:proyecto_chivoflix/inicio/listadopelis.dart';
 import 'package:proyecto_chivoflix/login/login.dart';
 import 'package:proyecto_chivoflix/perfiles/perfiles.dart';
 import 'package:proyecto_chivoflix/registro/registroUsuario.dart';
-import 'package:proyecto_chivoflix/detalle/detallePelicula.dart';
 
 void main() {
   runApp(const Principal());
@@ -18,7 +17,7 @@ class Principal extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: ListadoPelis.route,
+      initialRoute: Login.route,
       //initialRoute: perfiles.route,
       routes: {
         Login.route: (context) => Login(),
