@@ -14,6 +14,10 @@ class Registro extends StatefulWidget {
 }
 
 class _RegistroState extends State<Registro> {
+  final usuarioController = TextEditingController();
+  final correoController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPassController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +64,7 @@ class _RegistroState extends State<Registro> {
                 height: 15,
               ),
               TextField(
+                controller: correoController,
                 style: TextStyle(fontSize: 18, color: Colors.black54),
                 decoration: InputDecoration(
                     filled: true,
@@ -77,7 +82,7 @@ class _RegistroState extends State<Registro> {
                 height: 30,
               ),
               TextField(
-                obscureText: true,
+                controller: usuarioController,
                 style: TextStyle(fontSize: 18, color: Colors.black54),
                 decoration: InputDecoration(
                     filled: true,
@@ -95,6 +100,7 @@ class _RegistroState extends State<Registro> {
                 height: 30,
               ),
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 style: TextStyle(fontSize: 18, color: Colors.black54),
                 decoration: InputDecoration(
@@ -113,6 +119,7 @@ class _RegistroState extends State<Registro> {
                 height: 30,
               ),
               TextField(
+                controller: confirmPassController,
                 obscureText: true,
                 style: TextStyle(fontSize: 18, color: Colors.black54),
                 decoration: InputDecoration(
@@ -132,12 +139,19 @@ class _RegistroState extends State<Registro> {
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          alignment: Alignment.bottomCenter,
-                          child: TarifaSelect(),
-                          type: PageTransitionType.scale));
+                  if (confirmPassController.text == passwordController.text) {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            alignment: Alignment.bottomCenter,
+                            child: TarifaSelect(
+                                correo: correoController.text,
+                                usuario: usuarioController.text,
+                                password: passwordController.text),
+                            type: PageTransitionType.scale));
+                  } else {
+                    print("You shall no pass");
+                  }
                 },
                 child: Text(
                   'Registrarse',

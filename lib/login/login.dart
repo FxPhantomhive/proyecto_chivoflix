@@ -7,6 +7,7 @@ import 'package:proyecto_chivoflix/modelos/usuarios.dart';
 import 'package:proyecto_chivoflix/registro/registroUsuario.dart';
 import 'package:http/http.dart' as http;
 import 'package:proyecto_chivoflix/servidor.dart';
+import 'package:proyecto_chivoflix/inicio/listadopelis.dart';
 
 class Login extends StatefulWidget {
   static const String route = '/login';
@@ -45,6 +46,12 @@ class _LoginState extends State<Login> {
             item["idRol"],
             item["idPlanes"] ?? 0));
       }
+      Navigator.push(
+          context,
+          PageTransition(
+              alignment: Alignment.bottomCenter,
+              child: ListadoPelis(),
+              type: PageTransitionType.scale));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(login);
     }

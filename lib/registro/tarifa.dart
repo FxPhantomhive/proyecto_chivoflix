@@ -3,14 +3,24 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:proyecto_chivoflix/login/login.dart';
+import 'package:proyecto_chivoflix/modelos/usuarios.dart';
 import 'package:proyecto_chivoflix/registro/targeta.dart';
 import 'package:selectable_container/selectable_container.dart';
 
 bool seleccionado1 = false;
 bool seleccionado2 = false;
+int tarifa = 0;
 
 class TarifaSelect extends StatefulWidget {
-  TarifaSelect({Key? key}) : super(key: key);
+  final String correo;
+  final String usuario;
+  final String password;
+  TarifaSelect({
+    Key? key,
+    required this.correo,
+    required this.usuario,
+    required this.password,
+  }) : super(key: key);
 
   @override
   State<TarifaSelect> createState() => _TarifaSelectState();
@@ -19,6 +29,9 @@ class TarifaSelect extends StatefulWidget {
 class _TarifaSelectState extends State<TarifaSelect> {
   @override
   Widget build(BuildContext context) {
+    //print(widget.correo);
+    //print(widget.usuario);
+    //print(widget.password);
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -116,6 +129,7 @@ class _TarifaSelectState extends State<TarifaSelect> {
                   setState(() {
                     seleccionado1 = seleccionado;
                     seleccionado2 = false;
+                    tarifa = 1;
                   });
                 },
                 selectedBackgroundColor: Colors.black,
@@ -183,6 +197,7 @@ class _TarifaSelectState extends State<TarifaSelect> {
                   setState(() {
                     seleccionado2 = seleccionado_2;
                     seleccionado1 = false;
+                    tarifa = 2;
                   });
                 },
                 selectedBackgroundColor: Colors.black,
@@ -202,12 +217,20 @@ class _TarifaSelectState extends State<TarifaSelect> {
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          alignment: Alignment.bottomCenter,
-                          child: RTargeta(),
-                          type: PageTransitionType.scale));
+                  if (seleccionado1 || seleccionado2) {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            alignment: Alignment.bottomCenter,
+                            child: RTargeta(
+                                correo: widget.correo,
+                                usuario: widget.usuario,
+                                password: widget.password,
+                                tarifa: tarifa),
+                            type: PageTransitionType.scale));
+                  } else {
+                    print("You shall no pass");
+                  }
                 },
                 child: Text(
                   'Pagar Ahora',
