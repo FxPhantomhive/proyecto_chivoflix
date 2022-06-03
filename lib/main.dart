@@ -6,6 +6,7 @@ import 'package:proyecto_chivoflix/login/login.dart';
 import 'package:proyecto_chivoflix/perfiles/perfiles.dart';
 import 'package:proyecto_chivoflix/registro/confirmacionR.dart';
 import 'package:proyecto_chivoflix/registro/registroUsuario.dart';
+import 'package:proyecto_chivoflix/reproductor/reproductorv2.dart';
 
 void main() {
   runApp(const Principal());
@@ -28,7 +29,8 @@ class Principal extends StatelessWidget {
         Registro.route: (context) => Registro(),
         //detallePelicula.route: (context) => detallePelicula(),
         ListadoPelis.route: (context) => ListadoPelis(),
-        ConfirmacionR.route: (context) => ConfirmacionR()
+        ConfirmacionR.route: (context) => ConfirmacionR(),
+        //Reproductor2.route: (context) => Reproductor2()
       },
     );
   }

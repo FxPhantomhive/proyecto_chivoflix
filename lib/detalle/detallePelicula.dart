@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:proyecto_chivoflix/reproductor/reproductor.dart';
+import 'package:proyecto_chivoflix/reproductor/reproductorv2.dart';
 
 class detallePelicula extends StatefulWidget {
   final String nombre;
@@ -81,7 +82,11 @@ class _detallePeliculaState extends State<detallePelicula> {
                     context,
                     PageTransition(
                         alignment: Alignment.bottomCenter,
-                        child: Reproductor(
+                        child: Reproductor2(
+                          id: widget.id,
+                          nombre: widget.nombre,
+                          descrip: widget.descrip,
+                          imagen: widget.imagen,
                           urlpeli: widget.urlpeli,
                         ),
                         type: PageTransitionType.scale));
