@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 
 class Peliculas {
-  int idPeliculas = 0;
-  String nombre = "";
-  String anioEstreno = "";
-  String categoriaEdad = "";
-  String descripcion = "";
-  String calidad = "";
-  String director = "";
-  String banner = "";
-  String Pelicula = "";
+  final int idPeliculas;
+  final String nombre;
+  final String anioEstreno;
+  final String categoriaEdad;
+  final String descripcion;
+  final String calidad;
+  final String director;
+  final String banner;
+  final String pelicula;
 
-  Peliculas(idPeliculas, nombre, anioEstreno, categoriaEdad, descripcion,
-      calidad, director, banner, Pelicula) {
-    this.idPeliculas = idPeliculas;
-    this.nombre = nombre;
-    this.anioEstreno = anioEstreno;
-    this.categoriaEdad = categoriaEdad;
-    this.descripcion = descripcion;
-    this.calidad = calidad;
-    this.director = director;
-    this.banner = banner;
-    this.Pelicula = Pelicula;
-  }
+  Peliculas(
+    this.idPeliculas,
+    this.nombre,
+    this.anioEstreno,
+    this.categoriaEdad,
+    this.descripcion,
+    this.calidad,
+    this.director,
+    this.banner,
+    this.pelicula,
+  );
 }

@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:proyecto_chivoflix/modelos/peliculasmodelo.dart';
+import 'package:proyecto_chivoflix/modelos/usuarios.dart';
 import 'package:proyecto_chivoflix/registro/registroUsuario.dart';
+import 'package:http/http.dart' as http;
+import 'package:proyecto_chivoflix/servidor.dart';
 
 class Login extends StatefulWidget {
   static const String route = '/login';
@@ -11,6 +17,40 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final usuarioController = TextEditingController();
+  final passwordController = TextEditingController();
+  Future<List<Usuario>> _getLogin(
+      String usuario, String password, SnackBar login) async {
+    var url = Uri.parse("${apiUrl}loginf");
+    final response = await http.post(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(
+            <String, String>{"username": usuario, "password": password}));
+    String cuerpo;
+    datosUsuario = [];
+    if (response.statusCode == 200) {
+      //print(response.body);
+      cuerpo = utf8.decode(response.bodyBytes);
+      final jsonData = jsonDecode(cuerpo);
+      print(jsonData);
+      for (var item in jsonData) {
+        datosUsuario.add(Usuario(
+            item["idUsuarios"],
+            item["username"],
+            item["email"],
+            item["perfiles"],
+            item["imagen"],
+            item["idRol"],
+            item["idPlanes"] ?? 0));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(login);
+    }
+    return datosUsuario;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,25 +67,27 @@ class _LoginState extends State<Login> {
               height: 130,
             ),
             TextField(
-              style: TextStyle(fontSize: 18, color: Colors.black54),
+              controller: usuarioController,
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
                   hintText: "Username...",
                   contentPadding: const EdgeInsets.all(15),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5)),
                   enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5))),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             TextField(
+              controller: passwordController,
               obscureText: true,
-              style: TextStyle(fontSize: 18, color: Colors.black54),
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -62,7 +104,27 @@ class _LoginState extends State<Login> {
               height: 60,
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                final snackBarEspera = snackBarMensajes("Espere por favor...",
+                    const Color.fromARGB(255, 23, 124, 26));
+                final snackBarErrorLogin = snackBarMensajes(
+                    "Usuario y/o contraseña incorrectas",
+                    const Color.fromARGB(255, 194, 35, 23));
+
+                final snackBarIncompleto = snackBarMensajes(
+                    "Ingrese su usuario y contraseña",
+                    const Color.fromARGB(255, 194, 35, 23));
+
+                if (passwordController.text.isNotEmpty &&
+                    usuarioController.text.isNotEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(snackBarEspera);
+                  _getLogin(usuarioController.text, passwordController.text,
+                      snackBarErrorLogin);
+                } else {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(snackBarIncompleto);
+                }
+              },
               child: Text(
                 'INGRESAR',
                 style: TextStyle(
@@ -130,5 +192,19 @@ class _LoginState extends State<Login> {
         ),
       ),
     ));
+  }
+
+  SnackBar snackBarMensajes(String mensaje, Color color) {
+    return SnackBar(
+      content: Text(
+        mensaje,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: color,
+      behavior: SnackBarBehavior.floating,
+      elevation: 20,
+      duration: const Duration(milliseconds: 1000),
+      //width: 300,
+    );
   }
 }
